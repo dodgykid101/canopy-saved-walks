@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "journeys": 15,
+  "locations": 18,
+  "public_assets": 1582,
+  "protected_canopy_assets": 1480,
+  "site_bytes": 490724361,
+  "distance_m": [
+    670.55,
+    9736.95
+  ],
+  "duration_minutes": [
+    10.7,
+    147.5
+  ],
+  "saved_breathing_samples": 145,
+  "missing_temperature_samples_preserved": 13378,
+  "backend_required": false
+}
