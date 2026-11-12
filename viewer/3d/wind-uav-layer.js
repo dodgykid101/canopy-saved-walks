@@ -34,8 +34,16 @@ export async function createWindUavLayer({scene,camera,controls,config,configURL
   select(id){
    current=data.routes.find(r=>r.id===id);if(!current)throw Error('Route unavailable');R.duration=current.times_s.at(-1);R.playing=true;
    el('from').value=current.from;destinations(current.to);el('example').value=current.id;
-   if(routeLine){routeLine.geometry.dispose();routeLine.material.dispose();routeLine.removeFromParent();}
-   routeLine=createFlightCorridors([{points_m:current.points_enu_m.map(enuToWorld)}],{route_width_px:3,route_opacity:.95});routeLine.material.color.set(0xffbd63);routeLine.name='Validated wind-aware route';group.add(routeLine);
+   if(routeLine){routeLine.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});routeLine.removeFromParent();}
+   const routePoints=[{points_m:current.points_enu_m.map(enuToWorld)}];
+   routeLine=new THREE.Group();routeLine.name='Validated wind-aware route';
+   // A dark casing keeps the cyan path legible over both pale roofs and green land.
+   // Both strokes retain depth testing so buildings still occlude the flight path.
+   for(const [width,color,order] of [[8,0x092b42,19],[4,0x00e5ff,20]]){
+    const stroke=createFlightCorridors(routePoints,{route_width_px:width,route_opacity:1});
+    stroke.material.color.set(color);stroke.material.toneMapped=false;stroke.renderOrder=order;routeLine.add(stroke);
+   }
+   group.add(routeLine);
    startPad.position.fromArray(enuToWorld(data.stations.find(s=>s.id===current.from).position_enu_m));endPad.position.fromArray(enuToWorld(data.stations.find(s=>s.id===current.to).position_enu_m));
    endpointLabels.forEach((l,i)=>{const c=l.canvas.getContext('2d');c.clearRect(0,0,256,96);c.fillStyle='#142e2b';c.fillRect(0,0,256,96);c.fillStyle=l.color;c.font='bold 48px system-ui';c.textAlign='center';c.fillText(i?current.to:current.from,128,64);l.texture.needsUpdate=true;l.sprite.position.copy(i?endPad.position:startPad.position).add(new THREE.Vector3(0,9,0));});
    while(arrows.children.length){const child=arrows.children[0];child.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});arrows.remove(child);}
