@@ -1,5 +1,8 @@
 # Publish this static edition
 
+This copy is now published at https://dodgykid101.github.io/canopy-saved-walks/.
+The steps below are for publishing another copy or fork.
+
 1. Create an empty GitHub repository, for example `canopy-saved-walks`.
    GitHub Free supports Pages from public repositories. Review the included derived
    scenario outputs and upstream attribution before making the repository public.

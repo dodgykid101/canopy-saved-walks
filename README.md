@@ -1,5 +1,9 @@
 # Canopy — 15 saved healthy walking journeys
 
+**[Open the live website](https://dodgykid101.github.io/canopy-saved-walks/)**
+
+Published on GitHub Pages. The website works independently of the original computer.
+
 A complete static demonstration of Canopy's Imperial Corridor urban model and
 the pedestrian health-route work. Choose one of **15 individual journeys** spanning
 different areas and distances. No Python solver, cloud backend, tunnel, model
@@ -48,7 +52,7 @@ The largest file is about 47 MB; use Git to upload the folder because the web fi
 uploader has a lower per-file limit. Users still download 3D assets through their
 browser; a first visit can take time on slower connections.
 
-Nothing has been pushed to GitHub or published by preparing this package.
+Source repository: https://github.com/dodgykid101/canopy-saved-walks
 The package includes derived route/breathing predictions intended for the demo,
 but excludes raw participant history, weights, personal baseline, credentials,
 the Python solver and the Windows runtime. See THIRD_PARTY_NOTICES.md for attribution.
